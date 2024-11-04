@@ -6,8 +6,6 @@
     <persistence-unit name="eventos">
     <class>dominio.Evento</class>
     <class>dominio.EspacioFisico</class>
-    <class>dominio.Ocupacion</class>
-    <class>dominio.PuntoDeInteres</class>
         <properties>
             <property name="javax.persistence.jdbc.driver"
                 value="com.mysql.cj.jdbc.Driver" />

@@ -1,5 +1,6 @@
 package dominio;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,7 +23,7 @@ public class Evento implements Identificable{
     private boolean cancelado;
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
-    // Falta la relacion
+    @Embedded
     private Ocupacion ocupacion;
 
     public Evento(String id, String nombre, String descripcion, String organizador, int plazas, boolean cancelado, Categoria categoria, Ocupacion ocupacion) {

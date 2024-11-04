@@ -2,19 +2,13 @@ package dominio;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Embeddable;
+@Embeddable
 
-@Entity
 public class Ocupacion {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	
 	private LocalDateTime fechaInicio;
     private LocalDateTime fechaFin;
-    // Falta la relacion
     private EspacioFisico espacioFisico;
     private boolean activa;
     
