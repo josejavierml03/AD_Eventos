@@ -3,12 +3,20 @@ package dominio;
 import java.time.LocalDateTime;
 
 import javax.persistence.Embeddable;
-@Embeddable
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class Ocupacion {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private LocalDateTime fechaInicio;
     private LocalDateTime fechaFin;
+    @ManyToOne
     private EspacioFisico espacioFisico;
     private boolean activa;
     
@@ -17,6 +25,9 @@ public class Ocupacion {
         this.fechaFin = fechaFin;
         this.espacioFisico = espacioFisico;
         this.activa = calcularActiva(); 
+    }
+    
+    public Ocupacion() {
     }
     
     private boolean calcularActiva() {

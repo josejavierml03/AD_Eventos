@@ -3,7 +3,6 @@ package dominio;
 import javax.persistence.Embeddable;
 
 @Embeddable
-
 public class PuntoDeInteres {
 	
 	private String nombre;
@@ -16,6 +15,9 @@ public class PuntoDeInteres {
         this.descripcion = descripcion;
         this.distancia = distancia;
         this.urlAWikipedia = urlAWikipedia;
+    }
+    
+    public PuntoDeInteres() {
     }
 
 	public String getNombre() {

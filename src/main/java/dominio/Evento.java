@@ -1,5 +1,6 @@
 package dominio;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,7 +8,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 
 import repositorio.Identificable;
 @Entity
@@ -23,7 +26,8 @@ public class Evento implements Identificable{
     private boolean cancelado;
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
-    @Embedded
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ocupacion_id")
     private Ocupacion ocupacion;
 
     public Evento(String id, String nombre, String descripcion, String organizador, int plazas, boolean cancelado, Categoria categoria, Ocupacion ocupacion) {
@@ -35,6 +39,9 @@ public class Evento implements Identificable{
         this.cancelado = cancelado;
         this.categoria = categoria;
         this.ocupacion = ocupacion;
+    }
+    
+    public Evento() {
     }
 
 	public String getId() {

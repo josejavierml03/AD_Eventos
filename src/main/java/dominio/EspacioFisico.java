@@ -44,6 +44,9 @@ public class EspacioFisico implements Identificable {
         this.descripcion = descripcion;
         this.estado = estado;
     }
+    
+    public EspacioFisico() {
+    }
 
 	public String getId() {
 		return id;
