@@ -1,16 +1,13 @@
 package repositorioEventos;
 
-import java.time.LocalDateTime;
 import java.util.List;
-
-import dominio.EspacioFisico;
+import dominio.Evento;
 
 public class RepositorioEventosAdHocJPA extends RepositorioEventosJPA implements RepositorioEventosAdHoc {
 
 	@Override
-	public List<EspacioFisico> buscarEspaciosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int capacidadMinima) {
+	public List<Evento> getEventosDelMes(int mes, int año) {
+		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
