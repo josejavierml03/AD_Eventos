@@ -8,6 +8,8 @@ import dominio.Ocupacion;
 import dominio.PuntoDeInteres;
 import repositorio.Repositorio;
 import repositorio.RepositorioException;
+import repositorioEventos.RepositorioEspacioAdHoc;
+import repositorioEventos.RepositorioEventosAdHoc;
 import repositorio.EntidadNoEncontrada;
 import repositorio.FactoriaRepositorios;
 
@@ -20,8 +22,10 @@ import javax.persistence.Persistence;
 
 public class Pruebas {
     public static void main(String[] args) throws Exception  {
+    	RepositorioEventosAdHoc ea=  FactoriaRepositorios.getRepositorio(Evento.class);
+    	RepositorioEspacioAdHoc eb=  FactoriaRepositorios.getRepositorio(EspacioFisico.class);
         try {
-        	
+        	ea.buscarEspaciosLibres(null, null, 0);
             Repositorio<Evento, String> repositorioEvento = FactoriaRepositorios.getRepositorio(Evento.class);
             Repositorio<EspacioFisico, String> repositorioEspacio = FactoriaRepositorios.getRepositorio(EspacioFisico.class);
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("eventos");
