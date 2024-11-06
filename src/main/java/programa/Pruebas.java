@@ -25,7 +25,7 @@ public class Pruebas {
     	RepositorioEventosAdHoc ea=  FactoriaRepositorios.getRepositorio(Evento.class);
     	RepositorioEspacioAdHoc eb=  FactoriaRepositorios.getRepositorio(EspacioFisico.class);
         try {
-        	ea.buscarEspaciosLibres(null, null, 0);
+        	ea.getEventosDelMes(0, 0);
             Repositorio<Evento, String> repositorioEvento = FactoriaRepositorios.getRepositorio(Evento.class);
             Repositorio<EspacioFisico, String> repositorioEspacio = FactoriaRepositorios.getRepositorio(EspacioFisico.class);
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("eventos");
