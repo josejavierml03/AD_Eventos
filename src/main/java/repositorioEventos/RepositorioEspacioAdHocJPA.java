@@ -11,6 +11,8 @@ public class RepositorioEspacioAdHocJPA extends RepositorioEspacioJPA implements
 	public List<EspacioFisico> buscarEspaciosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
 			int capacidadMinima) {
 		return null;
+		
+		//Accede a la tabla eventos para ver las ocupaciones y las que coincidan con la id de espacio fisico y la capidad las obtienes 
 	}
 
 	

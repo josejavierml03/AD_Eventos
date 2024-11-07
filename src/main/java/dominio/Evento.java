@@ -26,8 +26,7 @@ public class Evento implements Identificable{
     private boolean cancelado;
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ocupacion_id")
+    @Embedded
     private Ocupacion ocupacion;
 
     public Evento(String id, String nombre, String descripcion, String organizador, int plazas, boolean cancelado, Categoria categoria, Ocupacion ocupacion) {

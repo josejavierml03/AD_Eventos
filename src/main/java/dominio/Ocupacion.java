@@ -9,11 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity
+@Embeddable
 public class Ocupacion {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+
 	private LocalDateTime fechaInicio;
     private LocalDateTime fechaFin;
     @ManyToOne
