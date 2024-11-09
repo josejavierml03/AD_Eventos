@@ -19,8 +19,6 @@
             <property name="eclipselink.cache.size.default" value="0" />
             <property name="eclipselink.refresh" value="true" />
             <property name="javax.persistence.provider" value="org.eclipse.persistence.jpa.PersistenceProvider" />
-            <property name="eclipselink.logging.level" value="FINE" />
-			<property name="eclipselink.logging.level.sql" value="FINE" />
 
         </properties>
     </persistence-unit>
