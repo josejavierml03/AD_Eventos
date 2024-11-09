@@ -13,7 +13,7 @@ public interface IServicioEspacios {
 	
 	void asignarPuntosDeInteres(String id, List<PuntoDeInteres> puntos ) throws RepositorioException, EntidadNoEncontrada;
 
-	void modificarEspacioFisico(String id, String nombre, int capacidad, String descripcion) throws RepositorioException, EntidadNoEncontrada;
+	void modificarEspacioFisico(String id, String nombre, Integer capacidad, String descripcion) throws RepositorioException, EntidadNoEncontrada;
 	
 	void darDeBajaEspacioFisico(String id) throws RepositorioException, EntidadNoEncontrada;
 	

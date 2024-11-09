@@ -23,14 +23,12 @@ public class RepositorioEspacioAdHocJPA extends RepositorioEspacioJPA implements
                 "FROM EspacioFisico e " +
                 "LEFT JOIN Evento ev ON ev.ocupacion.espacioFisico = e " +
                 "WHERE e.capacidad >= :capacidadMinima " +
-                "AND (ev IS NULL OR ev.ocupacion.fechaFin <= :fechaInicio OR ev.ocupacion.fechaInicio >= :fechaFin) " +
-                "AND e.estado = :estado";
+                "AND (ev IS NULL OR ev.ocupacion.fechaFin <= :fechaInicio OR ev.ocupacion.fechaInicio >= :fechaFin) " ;
 
 		TypedQuery<EspacioFisico> query = em.createQuery(queryString, EspacioFisico.class);
 		query.setParameter("capacidadMinima", capacidadMinima);
 		query.setParameter("fechaInicio", fechaInicio);
 		query.setParameter("fechaFin", fechaFin);
-		query.setParameter("estado", Estado.ACTIVO);
 
 	    return query.getResultList();
 	}

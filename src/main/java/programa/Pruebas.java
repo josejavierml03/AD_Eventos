@@ -1,34 +1,73 @@
 package programa;
 
-import dominio.Evento;
+import dominio.Categoria;
 import dominio.EspacioFisico;
-import repositorioEventos.RepositorioEspacioAdHoc;
-import repositorioEventos.RepositorioEventosAdHoc;
-import repositorio.FactoriaRepositorios;
+import dominio.PuntoDeInteres;
+import servicioEventos.ServicioEspacios;
+import servicioEventos.ServicioEventos;
+import servicioEventos.EventoResumen;
+import servicioEventos.IServicioEspacios;
+import servicioEventos.IServicioEventos;
+import repositorio.RepositorioException;
+import repositorio.EntidadNoEncontrada;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class Pruebas {
-    public static void main(String[] args) throws Exception  {
-    	RepositorioEventosAdHoc ea=  FactoriaRepositorios.getRepositorio(Evento.class);
-    	RepositorioEspacioAdHoc eb=  FactoriaRepositorios.getRepositorio(EspacioFisico.class);
+    public static void main(String[] args) throws Exception {
+        IServicioEspacios servicioEspacios = new ServicioEspacios();
+        IServicioEventos servicioEventos = new ServicioEventos();
+
         try {
-        	LocalDateTime fecha = LocalDateTime.of(2024, 11, 10, 10, 0);
-        	LocalDateTime fechab = LocalDateTime.of(2024, 11, 10, 12, 0);
-            List<EspacioFisico> a = eb.buscarEspaciosLibres(fecha, fechab, 50);
-            if (a.isEmpty()) {
-            	System.out.println("No hay espacios fisicos disponibles");
-            }else {
-            	System.out.println(a.get(0).getDescripcion());
+            String espacioId = servicioEspacios.altaDeUnEspacioFisico(
+                "Auditorio Principal", "María López", 300, "Calle Principal 123", 1, 19.4326, "Auditorio para conferencias");
+            System.out.println("Espacio físico creado con ID: " + espacioId);
+
+            List<PuntoDeInteres> puntosDeInteres = List.of(
+                new PuntoDeInteres("Biblioteca", "Biblioteca de la ciudad", 150, "https://es.wikipedia.org/wiki/Biblioteca"),
+                new PuntoDeInteres("Cafetería", "Lugar para relajarse y tomar café", 200, "https://es.wikipedia.org/wiki/Cafeter%C3%ADa")
+            );
+            servicioEspacios.asignarPuntosDeInteres(espacioId, puntosDeInteres);
+            System.out.println("Puntos de interés asignados al espacio físico.");
+
+            servicioEspacios.modificarEspacioFisico(espacioId, "Auditorio Renovado", 350, "Auditorio actualizado");
+            System.out.println("Espacio físico modificado.");
+
+            servicioEspacios.darDeBajaEspacioFisico(espacioId);
+            System.out.println("Espacio físico dado de baja.");
+            LocalDateTime fechaInicio = LocalDateTime.of(2024, 11, 10, 9, 0);
+            LocalDateTime fechaFin = LocalDateTime.of(2024, 11, 10, 18, 0);
+            LocalDateTime fechaInicio2 = LocalDateTime.of(2024, 11, 10, 18, 0);
+            LocalDateTime fechaFin2 = LocalDateTime.of(2024, 11, 11, 12, 0);
+            String eventoId = servicioEventos.altaEvento(
+                "Foro de Innovación", "Un evento sobre innovación tecnológica", "Carlos Ruiz",
+                Categoria.ACADEMICOS, fechaInicio, fechaFin, 200, "1");
+            System.out.println("Evento registrado con ID: " + eventoId);
+            List<EspacioFisico> espaciosDisponibles = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio, fechaFin, 10);
+            List<EspacioFisico> espaciosDisponibles2 = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio2, fechaFin2, 10);
+            System.out.println(espaciosDisponibles);
+            System.out.println(espaciosDisponibles2);
+
+            servicioEventos.modificarEvento(eventoId, fechaInicio.plusHours(1), fechaFin.plusHours(1), 250, null, "Foro actualizado");
+            System.out.println("Evento modificado.");
+
+            servicioEventos.cancelarEvento(eventoId);
+            System.out.println("Evento cancelado.");
+
+            List<EventoResumen> eventosDelMes = servicioEventos.eventosDelMes(11, 2024);
+            System.out.println("Eventos del mes:");
+            for (EventoResumen resumen : eventosDelMes) {
+                System.out.println(resumen.toString());
             }
-            List<Evento> b = ea.getEventosDelMes(10,2024);
-            if (b.isEmpty()) {
-            	System.out.println("No hay eventos este mes");
-            }else {
-            	System.out.println(b.get(0).getOcupacion().getEspacioFisico().getId());
-            }
-        } catch (Exception e) {
-            System.err.println("Excepción inesperada: " + e.getMessage());
+
+            servicioEspacios.activarEspacioFisico(espacioId);
+            System.out.println("Espacio fisico dado de alta.");
+
+        } catch (RepositorioException | EntidadNoEncontrada e) {
+            System.err.println("Error de repositorio: " + e.getMessage());
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error de validación: " + e.getMessage());
             e.printStackTrace();
         }
     }
