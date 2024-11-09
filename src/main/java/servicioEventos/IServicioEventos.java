@@ -10,7 +10,7 @@ import dominio.Categoria;
 
 public interface IServicioEventos {
 	
-	void altaEvento (String nombre, String desciprcion, String organizador, Categoria categoria, LocalDateTime fechaIncio, LocalDateTime fechaFin, int plazas, String id) throws RepositorioException;
+	void altaEvento (String nombre, String descripcion, String organizador, Categoria categoria, LocalDateTime fechaInicio, LocalDateTime fechaFin, int plazas, String idEspacio) throws RepositorioException, EntidadNoEncontrada;
 	
 	void modificarEvento(String id,LocalDateTime fechaInicio, LocalDateTime fechaFin, int plazas, EspacioFisico espacioFisico) throws RepositorioException, EntidadNoEncontrada;
 	

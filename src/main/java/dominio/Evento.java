@@ -26,13 +26,12 @@ public class Evento implements Identificable{
     @Embedded
     private Ocupacion ocupacion;
 
-    public Evento(String id, String nombre, String descripcion, String organizador, int plazas, boolean cancelado, Categoria categoria, Ocupacion ocupacion) {
-        this.id = id;
+    public Evento(String nombre, String descripcion, String organizador, int plazas, Categoria categoria, Ocupacion ocupacion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.organizador = organizador;
         this.plazas = plazas;
-        this.cancelado = cancelado;
+        this.cancelado = false;
         this.categoria = categoria;
         this.ocupacion = ocupacion;
     }

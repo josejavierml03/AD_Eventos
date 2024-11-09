@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import dominio.Categoria;
+import dominio.PuntoDeInteres;
 
 public class EventoResumen {
 
@@ -13,13 +14,21 @@ public class EventoResumen {
 	private Categoria categoria;
 	private String nombreEspacioFisico;
 	private String direccionEspacioFisico;
+	private List<PuntoDeInteres> puntos;
 	
+	public List<PuntoDeInteres> getPuntos() {
+		return puntos;
+	}
+
+	public void setPuntos(List<PuntoDeInteres> puntos) {
+		this.puntos = puntos;
+	}
+
 	@Override
 	public String toString() {
 		return "EventoResumen [nombre=" + nombre + ", descipcion=" + descipcion + ", fechaInicio=" + fechaInicio
 				+ ", categoria=" + categoria + ", nombreEspacioFisico=" + nombreEspacioFisico
-				+ ", direccionEspacioFisico=" + direccionEspacioFisico + ", nombresEspaciosCercanos="
-				+ nombresEspaciosCercanos + "]";
+				+ ", direccionEspacioFisico=" + direccionEspacioFisico + ", puntos=" + puntos + "]";
 	}
 	
 	public String getNombre() {
@@ -58,12 +67,5 @@ public class EventoResumen {
 	public void setDireccionEspacioFisico(String direccionEspacioFisico) {
 		this.direccionEspacioFisico = direccionEspacioFisico;
 	}
-	public List<String> getNombresEspaciosCercanos() {
-		return nombresEspaciosCercanos;
-	}
-	public void setNombresEspaciosCercanos(List<String> nombresEspaciosCercanos) {
-		this.nombresEspaciosCercanos = nombresEspaciosCercanos;
-	}
-	private List<String> nombresEspaciosCercanos;
 	
 }

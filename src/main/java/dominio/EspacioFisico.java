@@ -1,5 +1,6 @@
 package dominio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -30,19 +31,18 @@ public class EspacioFisico implements Identificable {
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
-    public EspacioFisico(String id, String nombre, String propietario, int capacidad, String direccion,
-    		double longitud, double latitud, List<PuntoDeInteres> puntosDeInteres,
-                         String descripcion, Estado estado) {
-        this.id = id;
+    public EspacioFisico(String nombre, String propietario, int capacidad, String direccion,
+    		double longitud, double latitud,  String descripcion) {
+
         this.nombre = nombre;
         this.propietario = propietario;
         this.capacidad = capacidad;
         this.direccion = direccion;
         this.longitud = longitud;
         this.latitud = latitud;
-        this.puntosDeInteres = puntosDeInteres;
+        this.puntosDeInteres = new ArrayList<PuntoDeInteres>();
         this.descripcion = descripcion;
-        this.estado = estado;
+        this.estado = Estado.ACTIVO;
     }
     
     public EspacioFisico() {
