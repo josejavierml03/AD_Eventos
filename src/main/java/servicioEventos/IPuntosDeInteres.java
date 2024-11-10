@@ -6,7 +6,7 @@ import dominio.PuntoDeInteres;
 
 public interface IPuntosDeInteres {
 	
-	List<PuntoDeInteres> obtenerPuntosDeInteres();
+	List<PuntoDeInteres> obtenerPuntosDeInteres(double latitud, double longitud);
 		
 	
 }
