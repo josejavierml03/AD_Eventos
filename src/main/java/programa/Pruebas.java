@@ -5,8 +5,10 @@ import dominio.EspacioFisico;
 import dominio.PuntoDeInteres;
 import servicioEventos.ServicioEspacios;
 import servicioEventos.ServicioEventos;
+import servicioEventos.PuntosDeInteres;
 import servicioEventos.EventoResumen;
 import servicioEventos.IServicioEspacios;
+import servicioEventos.IPuntosDeInteres;
 import servicioEventos.IServicioEventos;
 import repositorio.RepositorioException;
 import repositorio.EntidadNoEncontrada;
@@ -17,18 +19,24 @@ public class Pruebas {
     public static void main(String[] args) throws Exception {
         IServicioEspacios servicioEspacios = new ServicioEspacios();
         IServicioEventos servicioEventos = new ServicioEventos();
+        IPuntosDeInteres servicioPuntosDeInteres = new PuntosDeInteres();
 
         try {
             String espacioId = servicioEspacios.altaDeUnEspacioFisico(
-                "Auditorio Principal", "María López", 300, "Calle Principal 123", 1, 19.4326, "Auditorio para conferencias");
+                "Auditorio Principal", "María López", 300, "Calle Principal 123", 37.98412315304831, 19.4326, "Auditorio para conferencias");
             System.out.println("Espacio físico creado con ID: " + espacioId);
 
-            List<PuntoDeInteres> puntosDeInteres = List.of(
-                new PuntoDeInteres("Biblioteca", "Biblioteca de la ciudad", 150, "https://es.wikipedia.org/wiki/Biblioteca"),
-                new PuntoDeInteres("Cafetería", "Lugar para relajarse y tomar café", 200, "https://es.wikipedia.org/wiki/Cafeter%C3%ADa")
-            );
-            servicioEspacios.asignarPuntosDeInteres(espacioId, puntosDeInteres);
-            System.out.println("Puntos de interés asignados al espacio físico.");
+            double latitud = 37.98412315304831;  
+            double longitud = -1.1291804565199284;
+
+            List<PuntoDeInteres> puntosDeInteres = servicioPuntosDeInteres.obtenerPuntosDeInteres(latitud, longitud);
+
+            if (!puntosDeInteres.isEmpty()) {
+                servicioEspacios.asignarPuntosDeInteres(espacioId, puntosDeInteres);
+                System.out.println("Puntos de interés asignados al espacio físico.");
+            } else {
+                System.out.println("No se encontraron puntos de interés cercanos para las coordenadas proporcionadas.");
+            }
 
             servicioEspacios.modificarEspacioFisico(espacioId, "Auditorio Renovado", 350, "Auditorio actualizado");
             System.out.println("Espacio físico modificado.");
@@ -45,8 +53,8 @@ public class Pruebas {
             System.out.println("Evento registrado con ID: " + eventoId);
             List<EspacioFisico> espaciosDisponibles = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio, fechaFin, 10);
             List<EspacioFisico> espaciosDisponibles2 = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio2, fechaFin2, 10);
-            System.out.println(espaciosDisponibles);
-            System.out.println(espaciosDisponibles2);
+            System.out.println(espaciosDisponibles.toString());
+            System.out.println(espaciosDisponibles2.toString());
 
             servicioEventos.modificarEvento(eventoId, fechaInicio.plusHours(1), fechaFin.plusHours(1), 250, null, "Foro actualizado");
             System.out.println("Evento modificado.");

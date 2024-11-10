@@ -45,7 +45,14 @@ public class EspacioFisico implements Identificable {
         this.estado = Estado.ACTIVO;
     }
     
-    public EspacioFisico() {
+    @Override
+	public String toString() {
+		return "EspacioFisico [id=" + id + ", nombre=" + nombre + ", propietario=" + propietario + ", capacidad="
+				+ capacidad + ", direccion=" + direccion + ", longitud=" + longitud + ", latitud=" + latitud
+				+ ", puntosDeInteres=" + puntosDeInteres + ", descripcion=" + descripcion + ", estado=" + estado + "]";
+	}
+
+	public EspacioFisico() {
     }
 
 	public String getId() {

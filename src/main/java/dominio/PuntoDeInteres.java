@@ -1,13 +1,15 @@
 package dominio;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Lob;
 
 @Embeddable
 public class PuntoDeInteres {
 	
 	private String nombre;
+	@Lob
     private String descripcion;
-    private double distancia;
+	private double distancia;
     private String urlAWikipedia;
     
     public PuntoDeInteres(String nombre, String descripcion, double distancia, String urlAWikipedia) {
@@ -51,5 +53,12 @@ public class PuntoDeInteres {
 	public void setUrlAWikipedia(String urlAWikipedia) {
 		this.urlAWikipedia = urlAWikipedia;
 	}
+	
+	 @Override
+		public String toString() {
+			return "PuntoDeInteres [nombre=" + nombre + ", descripcion=" + descripcion + ", distancia=" + distancia
+					+ ", urlAWikipedia=" + urlAWikipedia + "]";
+		}
+
     
 }

@@ -35,9 +35,6 @@ public class ServicioEspacios implements IServicioEspacios{
 			
 		if (capacidad <= 0)
 				throw new IllegalArgumentException("capacidad: no debe ser menor o igual a 0");
-			
-		if (longitud <= 0)
-			throw new IllegalArgumentException("longitud: no debe ser menor o igual a 0");
 			 
 		EspacioFisico espacioFisico = new EspacioFisico(nombre, propietario, capacidad, direccion, longitud, latitud, descripcion);
 			
