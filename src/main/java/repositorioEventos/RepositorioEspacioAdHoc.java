@@ -7,4 +7,6 @@ import dominio.EspacioFisico;
 
 public interface RepositorioEspacioAdHoc {
 	public List<EspacioFisico> buscarEspaciosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidadMinima);
+	
+	public boolean espacioConOcupacionesActivas(String id);
 }

@@ -40,16 +40,20 @@ public class Pruebas {
 
             servicioEspacios.modificarEspacioFisico(espacioId, "Auditorio Renovado", 350, "Auditorio actualizado");
             System.out.println("Espacio físico modificado.");
-
+            LocalDateTime fechaInicio = LocalDateTime.of(2024, 11, 25, 9, 0);
+            LocalDateTime fechaFin = LocalDateTime.of(2024, 11, 25, 20, 0);
+            String eventoId = servicioEventos.altaEvento(
+                    "Foro de Innovación", "Un evento sobre innovación tecnológica", "Carlos Ruiz",
+                    Categoria.ACADEMICOS, fechaInicio, fechaFin, 200, "1");
             servicioEspacios.darDeBajaEspacioFisico(espacioId);
             System.out.println("Espacio físico dado de baja.");
-            LocalDateTime fechaInicio = LocalDateTime.of(2024, 11, 10, 9, 0);
-            LocalDateTime fechaFin = LocalDateTime.of(2024, 11, 10, 18, 0);
+            //LocalDateTime fechaInicio = LocalDateTime.of(2024, 11, 10, 9, 0);
+            //LocalDateTime fechaFin = LocalDateTime.of(2024, 11, 10, 18, 0);
             LocalDateTime fechaInicio2 = LocalDateTime.of(2024, 11, 10, 18, 0);
             LocalDateTime fechaFin2 = LocalDateTime.of(2024, 11, 11, 12, 0);
-            String eventoId = servicioEventos.altaEvento(
+            /*String eventoId = servicioEventos.altaEvento(
                 "Foro de Innovación", "Un evento sobre innovación tecnológica", "Carlos Ruiz",
-                Categoria.ACADEMICOS, fechaInicio, fechaFin, 200, "1");
+                Categoria.ACADEMICOS, fechaInicio, fechaFin, 200, "1");*/
             System.out.println("Evento registrado con ID: " + eventoId);
             List<EspacioFisico> espaciosDisponibles = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio, fechaFin, 10);
             List<EspacioFisico> espaciosDisponibles2 = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio2, fechaFin2, 10);

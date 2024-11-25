@@ -12,13 +12,11 @@ public class Ocupacion {
     private LocalDateTime fechaFin;
     @ManyToOne
     private EspacioFisico espacioFisico;
-    private boolean activa;
     
     public Ocupacion(LocalDateTime fechaInicio, LocalDateTime fechaFin, EspacioFisico espacioFisico) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.espacioFisico = espacioFisico;
-        this.activa = calcularActiva(); 
     }
     
     public Ocupacion() {
@@ -53,13 +51,7 @@ public class Ocupacion {
 		this.espacioFisico = espacioFisico;
 	}
 
-	public boolean isActiva() {
-		return activa;
-	}
 
-	public void setActiva(boolean activa) {
-		this.activa = activa;
-	}
 
 	
 	

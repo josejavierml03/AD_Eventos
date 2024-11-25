@@ -33,5 +33,23 @@ public class RepositorioEspacioAdHocJPA extends RepositorioEspacioJPA implements
 	    return query.getResultList();
 	}
 
-	
+	@Override
+    public boolean espacioConOcupacionesActivas(String id) {
+        EntityManager em = EntityManagerHelper.getEntityManager();
+
+        String queryString = "SELECT COUNT(e) " +
+                             "FROM Evento e " +
+                             "WHERE e.fechaInicio <= :now " +
+                             "AND e.fechaFin >= :now " +
+                             "AND e.espacioFisico.id = :id";
+
+        TypedQuery<Long> query = em.createQuery(queryString, Long.class);
+        query.setParameter("id", id);
+        query.setParameter("now", LocalDateTime.now());
+
+        Long count = query.getSingleResult();
+
+        return count > 0;
+    }
+
 }
