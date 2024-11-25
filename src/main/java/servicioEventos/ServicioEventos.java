@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import dominio.Categoria;
 import dominio.EspacioFisico;
+import dominio.Estado;
 import dominio.Evento;
 import dominio.Ocupacion;
 import dominio.PuntoDeInteres;
@@ -48,8 +49,12 @@ public class ServicioEventos implements IServicioEventos {
 			 
 		if (idEspacio == null || idEspacio.isEmpty())
 			throw new IllegalArgumentException("idEspacio: no debe ser nulo ni vacio");
-			 
+		
 		EspacioFisico espacio = repositorioEspacio.getById(idEspacio);
+		
+		if (espacio.getEstado() == Estado.CERRADO_TEMPORALMENTE) {
+			throw new IllegalArgumentException("no se puede crear un evento con un espacio cerrado temporalmente");
+		}
 			
 		Ocupacion ocupacion = new Ocupacion(fechaInicio, fechaFin, espacio);
 		Evento evento = new Evento(nombre, descripcion, organizador, plazas, categoria, ocupacion);

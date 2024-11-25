@@ -22,7 +22,7 @@ public class Ocupacion {
     public Ocupacion() {
     }
     
-    private boolean calcularActiva() {
+    public boolean calcularActiva() {
         LocalDateTime ahora = LocalDateTime.now();
         return !fechaInicio.isAfter(ahora) && !fechaFin.isBefore(ahora);
     }

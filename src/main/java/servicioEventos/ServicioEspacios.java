@@ -87,11 +87,10 @@ public class ServicioEspacios implements IServicioEspacios{
 		
 		if (id == null || id.isEmpty())
 			throw new IllegalArgumentException("id: no debe ser nulo ni vacio");
-		
-		if(repositorioAH.espacioConOcupacionesActivas(id)) {
+		boolean activas = repositorioAH.espacioConOcupacionesActivas(id).stream().anyMatch(o -> o.calcularActiva());
+		if(activas) {
 			throw new IllegalArgumentException("este espacioFisico tiene ocupaciones activas");
 		}
-		
 		EspacioFisico espacio = repositorio.getById(id);
 		
 		if(espacio.getEstado().equals(Estado.CERRADO_TEMPORALMENTE))
