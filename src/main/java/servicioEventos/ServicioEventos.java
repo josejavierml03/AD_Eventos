@@ -56,8 +56,7 @@ public class ServicioEventos implements IServicioEventos {
 			throw new IllegalArgumentException("no se puede crear un evento con un espacio cerrado temporalmente");
 		}
 			
-		Ocupacion ocupacion = new Ocupacion(fechaInicio, fechaFin, espacio);
-		Evento evento = new Evento(nombre, descripcion, organizador, plazas, categoria, ocupacion);
+		Evento evento = new Evento(nombre, descripcion, organizador, plazas, categoria, fechaInicio, fechaFin, espacio);
 		String id = repositorioEvento.add(evento);
 		return id;
 			

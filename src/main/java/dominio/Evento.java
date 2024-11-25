@@ -1,5 +1,7 @@
 package dominio;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -26,14 +28,14 @@ public class Evento implements Identificable{
     @Embedded
     private Ocupacion ocupacion;
 
-    public Evento(String nombre, String descripcion, String organizador, int plazas, Categoria categoria, Ocupacion ocupacion) {
+    public Evento(String nombre, String descripcion, String organizador, int plazas, Categoria categoria, LocalDateTime fechaInicio, LocalDateTime fechaFin, EspacioFisico espacioFisico) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.organizador = organizador;
         this.plazas = plazas;
         this.cancelado = false;
         this.categoria = categoria;
-        this.ocupacion = ocupacion;
+        this.ocupacion = new Ocupacion(fechaInicio, fechaFin, espacioFisico);
     }
     
     public Evento() {
