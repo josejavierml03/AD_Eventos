@@ -52,5 +52,26 @@ public class RepositorioEspacioAdHocJPA extends RepositorioEspacioJPA implements
 	    
 	    return ocupacionesActivas;
 	}
+	
+	@Override
+	public List<EspacioFisico> buscarPorPropietario(String propietario) {
+	    if (propietario == null || propietario.isEmpty()) {
+	        throw new IllegalArgumentException("propietario: no debe ser nulo ni vacío");
+	    }
+
+	    EntityManager em = EntityManagerHelper.getEntityManager();
+	    
+	    String queryString = "SELECT e " +
+	                         "FROM EspacioFisico e " +
+	                         "WHERE e.propietario = :propietario";
+	    
+	    TypedQuery<EspacioFisico> query = em.createQuery(queryString, EspacioFisico.class);
+	    query.setParameter("propietario", propietario);
+	    
+	    List<EspacioFisico> espacios = query.getResultList();
+	    
+	    return espacios;
+	}
+	
 
 }

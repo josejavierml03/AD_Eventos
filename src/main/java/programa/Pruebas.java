@@ -23,7 +23,7 @@ public class Pruebas {
 
         try {
             String espacioId = servicioEspacios.altaDeUnEspacioFisico(
-                "Auditorio Principal", "María López", 300, "Calle Principal 123", 37.98412315304831, 19.4326, "Auditorio para conferencias");
+                "Auditorio Principal", "a", 300, "Calle Principal 123", 37.98412315304831, 19.4326, "Auditorio para conferencias");
             System.out.println("Espacio físico creado con ID: " + espacioId);
 
             double latitud = 37.98412315304831;  
@@ -46,6 +46,8 @@ public class Pruebas {
                     "Foro de Innovación", "Un evento sobre innovación tecnológica", "Carlos Ruiz",
                     Categoria.ACADEMICOS, fechaInicio, fechaFin, 200, "1");
             servicioEspacios.darDeBajaEspacioFisico(espacioId);
+            System.out.println("Espacios de 'a'"+servicioEspacios.obtenerEspaciosPorPropietario("a"));
+           
             System.out.println("Espacio físico dado de baja.");
 
             LocalDateTime fechaInicio2 = LocalDateTime.of(2024, 11, 10, 18, 0);

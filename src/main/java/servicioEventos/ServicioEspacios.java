@@ -15,7 +15,7 @@ import repositorio.FactoriaRepositorios;
 public class ServicioEspacios implements IServicioEspacios{
 	
 	private Repositorio<EspacioFisico, String> repositorio = FactoriaRepositorios.getRepositorio(EspacioFisico.class);
-	RepositorioEspacioAdHoc repositorioAH=  FactoriaRepositorios.getRepositorio(EspacioFisico.class);
+	RepositorioEspacioAdHoc repositorioAH =  FactoriaRepositorios.getRepositorio(EspacioFisico.class);
 
 	@Override
 	public String altaDeUnEspacioFisico(String nombre, String propietario, int capacidad, String direccion,
@@ -126,5 +126,14 @@ public class ServicioEspacios implements IServicioEspacios{
 		
 		return repositorioAH.buscarEspaciosLibres(fechaInicio, fechaFin, capacidadMinima);
 	}
+	
+	@Override
+	public List<EspacioFisico> obtenerEspaciosPorPropietario(String propietario) throws RepositorioException {
+	    if (propietario == null || propietario.isEmpty())
+	        throw new IllegalArgumentException("propietario: no debe ser nulo ni vacio");
+
+	    return repositorioAH.buscarPorPropietario(propietario);
+	}
+
 
 }
