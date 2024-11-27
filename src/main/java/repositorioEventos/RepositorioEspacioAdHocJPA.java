@@ -16,26 +16,30 @@ import utils.EntityManagerHelper;
 public class RepositorioEspacioAdHocJPA extends RepositorioEspacioJPA implements RepositorioEspacioAdHoc{
 
 	@Override
-	public List<EspacioFisico> buscarEspaciosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
-			int capacidadMinima) {
-		EntityManager em = EntityManagerHelper.getEntityManager();
+	public List<EspacioFisico> buscarEspaciosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidadMinima) {
+	    EntityManager em = EntityManagerHelper.getEntityManager();
 	    
 	    String queryString = "SELECT e " +
 	                         "FROM EspacioFisico e " +
-	                         "LEFT JOIN Evento ev ON ev.ocupacion.espacioFisico = e " +
 	                         "WHERE e.capacidad >= :capacidadMinima " +
 	                         "AND e.estado = :estadoActivo " +
-	                         "AND (ev IS NULL OR " +
-	                         "     ev.ocupacion.fechaInicio >= :fechaFin OR " +
-	                         "     ev.ocupacion.fechaFin <= :fechaInicio)";
+	                         "AND NOT EXISTS ( " +
+	                         "    SELECT 1 " +
+	                         "    FROM Evento ev " +
+	                         "    WHERE ev.ocupacion.espacioFisico = e " +
+	                         "    AND ev.ocupacion.fechaInicio < :fechaFin " +
+	                         "    AND ev.ocupacion.fechaFin > :fechaInicio " +
+	                         ")";
 	    
 	    TypedQuery<EspacioFisico> query = em.createQuery(queryString, EspacioFisico.class);
 	    query.setParameter("capacidadMinima", capacidadMinima);
 	    query.setParameter("fechaInicio", fechaInicio);
 	    query.setParameter("fechaFin", fechaFin);
 	    query.setParameter("estadoActivo", Estado.ACTIVO);
+	    
 	    return query.getResultList();
 	}
+
 
 	@Override
 	public List<Ocupacion> espacioConOcupacionesActivas(String id) {

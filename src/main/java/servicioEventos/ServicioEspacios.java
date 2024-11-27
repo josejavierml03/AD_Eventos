@@ -1,11 +1,13 @@
 package servicioEventos;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import dominio.EspacioFisico;
 import dominio.Estado;
 import dominio.PuntoDeInteres;
+import dto.EspacioFisicoDTO;
 import repositorio.EntidadNoEncontrada;
 import repositorio.Repositorio;
 import repositorio.RepositorioException;
@@ -118,22 +120,40 @@ public class ServicioEspacios implements IServicioEspacios{
 	}
 
 	@Override
-	public List<EspacioFisico> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
+	public List<EspacioFisicoDTO> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin,
 			int capacidadMinima) throws RepositorioException {
 		
 		if(fechaInicio.isAfter(fechaFin) || fechaInicio.equals(null) || fechaFin.equals(null)) 
 				throw new IllegalArgumentException("fechas incorrectas");
 		
-		return repositorioAH.buscarEspaciosLibres(fechaInicio, fechaFin, capacidadMinima);
+		List<EspacioFisico> espacios = repositorioAH.buscarEspaciosLibres(fechaInicio, fechaFin, capacidadMinima);
+		System.out.println(espacios.size());
+		List<EspacioFisicoDTO> espaciosDTO = new ArrayList<>();
+		    for (EspacioFisico e : espacios) {
+		    	espaciosDTO.add(transformToDTO(e,false));
+		    }
+		return espaciosDTO;
 	}
 	
 	@Override
-	public List<EspacioFisico> obtenerEspaciosPorPropietario(String propietario) throws RepositorioException {
+	public List<EspacioFisicoDTO> obtenerEspaciosPorPropietario(String propietario) throws RepositorioException {
 	    if (propietario == null || propietario.isEmpty())
 	        throw new IllegalArgumentException("propietario: no debe ser nulo ni vacio");
 
-	    return repositorioAH.buscarPorPropietario(propietario);
+	    List<EspacioFisico> espacios = repositorioAH.buscarPorPropietario(propietario);
+	    List<EspacioFisicoDTO> espaciosDTO = new ArrayList<>();
+	    for (EspacioFisico e : espacios) {
+	    	espaciosDTO.add(transformToDTO(e,true));
+	    }
+	    return espaciosDTO;
+	    
 	}
 
+	private EspacioFisicoDTO transformToDTO(EspacioFisico e, boolean tipo) {
+		if (tipo) {
+			return new EspacioFisicoDTO(e.getNombre(),e.getCapacidad(), e.getDireccion(), e.getEstado());
+        }
+		return new EspacioFisicoDTO(e.getNombre(),e.getCapacidad(), e.getDireccion(), e.getDescripcion(),e.getPropietario());
+    }
 
 }

@@ -2,6 +2,7 @@ package programa;
 
 import dominio.Categoria;
 import dominio.EspacioFisico;
+import dto.EspacioFisicoDTO;
 import dominio.PuntoDeInteres;
 import servicioEventos.ServicioEspacios;
 import servicioEventos.ServicioEventos;
@@ -53,8 +54,8 @@ public class Pruebas {
             LocalDateTime fechaInicio2 = LocalDateTime.of(2024, 11, 10, 18, 0);
             LocalDateTime fechaFin2 = LocalDateTime.of(2024, 11, 11, 12, 0);
             System.out.println("Evento registrado con ID: " + eventoId);
-            List<EspacioFisico> espaciosDisponibles = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio, fechaFin, 10);
-            List<EspacioFisico> espaciosDisponibles2 = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio2, fechaFin2, 10);
+            List<EspacioFisicoDTO> espaciosDisponibles = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio, fechaFin, 10);
+            List<EspacioFisicoDTO> espaciosDisponibles2 = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio2, fechaFin2, 10);
             System.out.println(espaciosDisponibles.toString());
             System.out.println(espaciosDisponibles2.toString());
 
@@ -72,8 +73,8 @@ public class Pruebas {
 
             servicioEspacios.activarEspacioFisico(espacioId);
             System.out.println("Espacio fisico dado de alta.");
-            List<EspacioFisico> espaciosDisponibles3 = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio, fechaFin, 10);
-            List<EspacioFisico> espaciosDisponibles4 = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio2, fechaFin2, 10);
+            List<EspacioFisicoDTO> espaciosDisponibles3 = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio, fechaFin, 10);
+            List<EspacioFisicoDTO> espaciosDisponibles4 = servicioEspacios.buscarEspaciosFisicosLibres(fechaInicio2, fechaFin2, 10);
             System.out.println(espaciosDisponibles3.toString());
             System.out.println(espaciosDisponibles4.toString());
 

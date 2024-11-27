@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import servicioEventos.IServicioEspacios;
 import dominio.EspacioFisico;
+import dto.EspacioFisicoDTO;
 import servicio.FactoriaServicios;
 
 @SuppressWarnings("serial")
@@ -19,7 +20,7 @@ import servicio.FactoriaServicios;
 public class EspaciosWeb implements Serializable {
 	
 	private IServicioEspacios servicioEspacios;
-    private List<EspacioFisico> espacios;
+    private List<EspacioFisicoDTO> espacios;
     private String propietario;
     
     public EspaciosWeb() {
@@ -40,8 +41,6 @@ public class EspaciosWeb implements Serializable {
         }
     }
 
-
-    
     public void cargarEspacios() {
         try {
             espacios = servicioEspacios.obtenerEspaciosPorPropietario(propietario);
@@ -75,7 +74,7 @@ public class EspaciosWeb implements Serializable {
     }
 
 
-    public List<EspacioFisico> getEspacios() {
+    public List<EspacioFisicoDTO> getEspacios() {
         return espacios;
     }
 

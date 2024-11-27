@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import dominio.EspacioFisico;
 import dominio.PuntoDeInteres;
+import dto.EspacioFisicoDTO;
 import repositorio.RepositorioException;
 import repositorio.EntidadNoEncontrada;
 
@@ -19,7 +20,7 @@ public interface IServicioEspacios {
 	
 	void activarEspacioFisico(String id) throws RepositorioException, EntidadNoEncontrada;
 	
-	List<EspacioFisico> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidadMinima) throws RepositorioException;
+	List<EspacioFisicoDTO> buscarEspaciosFisicosLibres(LocalDateTime fechaInicio, LocalDateTime fechaFin, int capacidadMinima) throws RepositorioException;
 	
-	public List<EspacioFisico> obtenerEspaciosPorPropietario(String propietario) throws RepositorioException;
+	public List<EspacioFisicoDTO> obtenerEspaciosPorPropietario(String propietario) throws RepositorioException;
 }
