@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Crear Evento</title>
+</h:head>
+
+<h:body>
+    <h:form id="formBusqueda">
+        <h2>Buscar Espacios Disponibles</h2>
+
+        <p:messages id="mensajes" autoUpdate="true" showDetail="true" closable="true" styleClass="ui-message-info" />
+
+        <p:outputLabel for="fechaInicio" value="Fecha de Inicio:" />
+        <p:calendar id="fechaInicio" value="#{eventoBean.fechaInicio}" pattern="yyyy-MM-dd HH:mm" showTime="true" />
+
+        <p:outputLabel for="fechaFin" value="Fecha de Fin:" />
+        <p:calendar id="fechaFin" value="#{eventoBean.fechaFin}" pattern="yyyy-MM-dd HH:mm" showTime="true" />
+
+        <p:outputLabel for="capacidadMinima" value="Capacidad Mínima:" />
+        <p:inputNumber id="capacidadMinima" value="#{eventoBean.capacidadMinima}" />
+
+        <p:commandButton value="Buscar" action="#{eventoBean.buscarEspaciosDisponibles}" update="mensajes tablaEspacios" />
+
+        <p:dataTable id="tablaEspacios" value="#{eventoBean.espaciosDisponibles}" var="espacio"
+                     emptyMessage="No se encontraron espacios disponibles."
+                     style="margin-top:20px;">
+            <p:column headerText="Nombre">
+                <h:outputText value="#{espacio.nombre}" />
+            </p:column>
+            <p:column headerText="Capacidad">
+                <h:outputText value="#{espacio.capacidad}" />
+            </p:column>
+            <p:column headerText="Dirección">
+                <h:outputText value="#{espacio.direccion}" />
+            </p:column>
+            <p:column headerText="Descripción">
+                <h:outputText value="#{espacio.descripcion}" />
+            </p:column>
+            <p:column headerText="Propietario">
+                <h:outputText value="#{espacio.propietario}" />
+            </p:column>
+            <p:column headerText="Seleccionar">
+                <p:commandButton value="Seleccionar"
+                 action="#{eventoBean.seleccionarEspacio(espacio)}"
+                 update=":formCrearEvento" />
+
+            </p:column>
+        </p:dataTable>
+    </h:form>
+
+    <h:form id="formCrearEvento">
+	    <h2>Crear Evento</h2>
+	
+	    <p:messages id="mensajesCrear" autoUpdate="true" showDetail="true" closable="true" styleClass="ui-message-info" />
+	
+	    <p:outputLabel value="Espacio Seleccionado:" />
+	    <h:outputText value="#{eventoBean.espacioSeleccionado.nombre}" />
+	
+	    <p:outputLabel for="nombreEvento" value="Nombre del Evento:" />
+	    <p:inputText id="nombreEvento" value="#{eventoBean.nombreEvento}" />
+	
+	    <p:outputLabel for="descripcionEvento" value="Descripción del Evento:" />
+	    <p:inputTextarea id="descripcionEvento" value="#{eventoBean.descripcionEvento}" />
+	
+	    <p:outputLabel for="organizador" value="Organizador:" />
+	    <p:inputText id="organizador" value="#{eventoBean.organizador}" />
+	
+	    <p:outputLabel for="categoria" value="Categoría:" />
+	    <p:selectOneMenu id="categoria" value="#{eventoBean.categoria}">
+	        <f:selectItems value="#{eventoBean.categoriasDisponibles}" var="categoria" 
+	                       itemLabel="#{categoria}" itemValue="#{categoria}" />
+	    </p:selectOneMenu>
+	
+	    <p:outputLabel for="plazas" value="Número de Plazas:" />
+	    <p:inputNumber id="plazas" value="#{eventoBean.plazas}" />
+	
+	    <p:commandButton value="Crear Evento" action="#{eventoBean.crearEvento}" update="mensajesCrear" />
+	</h:form>
+
+</h:body>
+</html>
+

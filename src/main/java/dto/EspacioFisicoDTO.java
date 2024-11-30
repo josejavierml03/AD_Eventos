@@ -8,6 +8,7 @@ import dominio.Estado;
 @SuppressWarnings("serial")
 public class EspacioFisicoDTO implements Serializable{
 	
+	private String id;
 	private String nombre;
     private int capacidad;
     private String direccion;
@@ -15,8 +16,9 @@ public class EspacioFisicoDTO implements Serializable{
     private Estado estado;
     private String propietario;
     
-	public EspacioFisicoDTO(String nombre, int capacidad, String direccion, String descripcion, String propietario) {
+	public EspacioFisicoDTO(String id,String nombre, int capacidad, String direccion, String descripcion, String propietario) {
 		super();
+		this.id=id;
 		this.nombre = nombre;
 		this.capacidad = capacidad;
 		this.direccion = direccion;
@@ -24,15 +26,24 @@ public class EspacioFisicoDTO implements Serializable{
 		this.propietario = propietario;
 	}
 	
-	public EspacioFisicoDTO(String nombre, int capacidad, String direccion, Estado estado) {
+	public EspacioFisicoDTO(String id,String nombre, int capacidad, String direccion, Estado estado) {
 		super();
+		this.id=id;
 		this.nombre = nombre;
 		this.capacidad = capacidad;
 		this.direccion = direccion;
 		this.estado = estado;
 	}
     
-    @Override
+    public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	@Override
 	public String toString() {
 		return "EspacioFisicoDTO [nombre=" + nombre + ", capacidad=" + capacidad + ", direccion=" + direccion
 				+ ", descripcion=" + descripcion + ", estado=" + estado + ", propietario=" + propietario + "]";

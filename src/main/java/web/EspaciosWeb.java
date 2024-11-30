@@ -53,9 +53,9 @@ public class EspaciosWeb implements Serializable {
         }
     }
     
-    public void darDeBaja(EspacioFisico espacio) {
+    public void darDeBaja(EspacioFisicoDTO espacioDTO) {
         try {
-            servicioEspacios.darDeBajaEspacioFisico(espacio.getId());
+            servicioEspacios.darDeBajaEspacioFisico(espacioDTO.getId());
             cargarEspacios();
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,9 +63,10 @@ public class EspaciosWeb implements Serializable {
         }
     }
 
-    public void activar(EspacioFisico espacio) {
+
+    public void activar(EspacioFisicoDTO espacioDTO) {
         try {
-            servicioEspacios.activarEspacioFisico(espacio.getId());
+            servicioEspacios.activarEspacioFisico(espacioDTO.getId());
             cargarEspacios();
         } catch (Exception e) {
             e.printStackTrace();

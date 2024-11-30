@@ -151,9 +151,9 @@ public class ServicioEspacios implements IServicioEspacios{
 
 	private EspacioFisicoDTO transformToDTO(EspacioFisico e, boolean tipo) {
 		if (tipo) {
-			return new EspacioFisicoDTO(e.getNombre(),e.getCapacidad(), e.getDireccion(), e.getEstado());
+			return new EspacioFisicoDTO(e.getId(),e.getNombre(),e.getCapacidad(), e.getDireccion(), e.getEstado());
         }
-		return new EspacioFisicoDTO(e.getNombre(),e.getCapacidad(), e.getDireccion(), e.getDescripcion(),e.getPropietario());
+		return new EspacioFisicoDTO(e.getId(),e.getNombre(),e.getCapacidad(), e.getDireccion(), e.getDescripcion(),e.getPropietario());
     }
 
 }
