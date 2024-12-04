@@ -5,26 +5,97 @@
 <h:head>
     <meta charset="utf-8" />
     <title>Listado de Espacios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        #formListado {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1000px;
+        }
+        #tablaEspacios {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; 
+        }
+        #tablaEspacios th {
+            background: #4CAF50;
+            color: white;
+            text-align: left;
+            padding: 10px;
+        }
+        #tablaEspacios td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            word-wrap: break-word; 
+        }
+        #tablaEspacios tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        #tablaEspacios tr:hover {
+            background: #f1f1f1;
+        }
+        .ui-button-danger, .ui-button-success {
+            width: 100px; 
+            padding: 5px;
+            border: none;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+        }
+        .ui-button-danger {
+            background-color: #f44336;
+        }
+        .ui-button-danger:hover {
+            background-color: #d32f2f;
+        }
+        .ui-button-success {
+            background-color: #4CAF50;
+        }
+        .ui-button-success:hover {
+            background-color: #388E3C;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333333;
+        }
+    </style>
 </h:head>
 <h:body>
     <h:form id="formListado">
+        <h1>Listado de Espacios</h1>
         <p:dataTable id="tablaEspacios" value="#{espaciosWeb.espacios}" var="espacio"
                      emptyMessage="No se encontraron espacios"
                      style="margin-top:20px;">
-            <p:column headerText="Nombre">
+            <p:column headerText="Nombre" style="width: 15%;">
                 <h:outputText value="#{espacio.nombre}" />
             </p:column>
-            <p:column headerText="Capacidad">
+            <p:column headerText="Capacidad" style="width: 15%;">
                 <h:outputText value="#{espacio.capacidad}" />
             </p:column>
-            <p:column headerText="Dirección Postal">
+            <p:column headerText="Dirección Postal" style="width: 25%;">
                 <h:outputText value="#{espacio.direccion}" />
             </p:column>
-            <p:column headerText="Estado">
+            <p:column headerText="Estado" style="width: 30%;">
                 <h:outputText value="#{espacio.estado}" />
             </p:column>
 
-            <p:column headerText="Acciones">
+            <p:column headerText="Acciones" style="width: 15%; text-align: center;">
                 <h:commandButton value="Dar de Baja" 
                                  action="#{espaciosWeb.darDeBaja(espacio)}" 
                                  rendered="#{espacio.estado eq 'ACTIVO'}"
@@ -36,8 +107,8 @@
                                  update="tablaEspacios" 
                                  styleClass="ui-button-success" />
             </p:column>
-
         </p:dataTable>
     </h:form> 
 </h:body>
 </html>
+
