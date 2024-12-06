@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Falso Inicio de Sesión</title>
+    <title>Inicio de Sesión</title>
     <style>
-        body {
+	 body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
             margin: 0;
@@ -55,18 +58,29 @@
             margin-top: 15px;
             font-size: 0.9rem;
             color: #666666;
-        }
+        } 	
+
     </style>
 </head>
 <body>
     <div class="login-container">
         <h1>Iniciar Sesión</h1>
-        <form>
-            <input type="text" placeholder="Usuario" name="username" />
-            <input type="password" placeholder="Contraseña" name="password" />
-            <button type="button">Ingresar</button>
-        </form>
-        <p>¿Olvidaste tu contraseña?</p>
+        <h:form>
+            <h:inputText value="#{loginBean.usuario}" 
+                         placeholder="Usuario" 
+                         required="true" 
+                         requiredMessage="El usuario es obligatorio." />
+            <div class="radio-container">
+                <label>
+                    <h:selectOneRadio value="#{loginBean.rol}" required="true" requiredMessage="Seleccione un rol.">
+                        <f:selectItem itemValue="propietario" itemLabel="Propietario" />
+                        <f:selectItem itemValue="organizador" itemLabel="Organizador" />
+                    </h:selectOneRadio>
+                </label>
+            </div>
+            <h:commandButton value="Ingresar" action="#{loginBean.redirigir}" styleClass="login-button" />
+        </h:form>
     </div>
 </body>
 </html>
+
