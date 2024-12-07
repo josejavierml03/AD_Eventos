@@ -92,6 +92,9 @@
 </head>
 <body>
     <div class="login-container">
+    <f:metadata>
+    	<f:event type="preRenderView" listener="#{loginBean.verificarSesion}" />
+	</f:metadata>
         <h1>Iniciar Sesión</h1>
         <h:form>
             <h:inputText value="#{loginBean.usuario}" 
