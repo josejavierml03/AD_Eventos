@@ -42,7 +42,7 @@ public class LoginBean implements Serializable {
             } else if ("organizador".equals(rol)) {
             	FacesContext.getCurrentInstance()
                 .getExternalContext()
-                .redirect("buscadorEspacios.xhtml");
+                .redirect("crearEvento.xhtml");
             }
         } catch (IOException e) {
             e.printStackTrace();
