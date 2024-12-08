@@ -10,7 +10,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import servicioEventos.IServicioEspacios;
-import dominio.EspacioFisico;
 import dto.EspacioFisicoDTO;
 import servicio.FactoriaServicios;
 
@@ -22,6 +21,7 @@ public class EspaciosWeb implements Serializable {
 	private IServicioEspacios servicioEspacios;
     private List<EspacioFisicoDTO> espacios;
     private String propietario;
+    private boolean mostrarModalError;
     
     public EspaciosWeb() {
     	servicioEspacios = FactoriaServicios.getServicio(IServicioEspacios.class);
@@ -32,7 +32,6 @@ public class EspaciosWeb implements Serializable {
         propietario = FacesContext.getCurrentInstance().getExternalContext()
                 .getRequestParameterMap().get("propietario");
 
-        System.out.println("Propietario recibido: " + propietario);
 
         if (propietario != null && !propietario.isEmpty()) {
             cargarEspacios();
@@ -55,17 +54,19 @@ public class EspaciosWeb implements Serializable {
     
     public void darDeBaja(EspacioFisicoDTO espacioDTO) {
         try {
+        	setMostrarModalError(false);
             servicioEspacios.darDeBajaEspacioFisico(espacioDTO.getId());
-            cargarEspacios();
+            cargarEspacios();	
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error al dar de baja el espacio: " + e.getMessage());
+            setMostrarModalError(true); 
         }
     }
 
 
     public void activar(EspacioFisicoDTO espacioDTO) {
         try {
+        	setMostrarModalError(false);
             servicioEspacios.activarEspacioFisico(espacioDTO.getId());
             cargarEspacios();
         } catch (Exception e) {
@@ -86,4 +87,13 @@ public class EspaciosWeb implements Serializable {
     public String getPropietario() {
         return propietario;
     }
+
+	public boolean isMostrarModalError() {
+		return mostrarModalError;
+	}
+
+	public void setMostrarModalError(boolean mostrarModalError) {
+		this.mostrarModalError = mostrarModalError;
+	}
+
 }

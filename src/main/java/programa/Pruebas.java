@@ -1,7 +1,6 @@
 package programa;
 
 import dominio.Categoria;
-import dominio.EspacioFisico;
 import dto.EspacioFisicoDTO;
 import dominio.PuntoDeInteres;
 import servicioEventos.ServicioEspacios;

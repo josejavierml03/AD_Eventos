@@ -17,6 +17,7 @@ public class LoginBean implements Serializable {
 
     private String rol;
     private String usuario;
+    
 
     @PostConstruct
     public void init() {

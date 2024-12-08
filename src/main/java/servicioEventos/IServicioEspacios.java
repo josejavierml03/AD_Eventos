@@ -2,7 +2,6 @@ package servicioEventos;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import dominio.EspacioFisico;
 import dominio.PuntoDeInteres;
 import dto.EspacioFisicoDTO;
 import repositorio.RepositorioException;
